@@ -1,5 +1,5 @@
 Project 00 - Coin Change
-===============================
+===========+====================
 
 Go [back to home page](../../index.html)
 
