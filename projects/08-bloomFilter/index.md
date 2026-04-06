@@ -14,13 +14,15 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
+	- [C++](./implementations/bloomFilter.cpp)
 	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [Python](./implementations/bloomFilter.py)
 	- io
-		- [test input 1](./implementations/io/sample.in.1)
-		- [test output 1](./implementations/io/sample.out.1)
+		- [test input 1](./implementations/io/test.txt)
+		- [test output 1](./implementations/io/expected_output.txt)
 		- ...add more as needed
+
+**Implementation note.** Our Python, Java, and C++ runs can produce different outputs for the same input, because built-in string hashing and type behavior differ by language, so the bit indices we flip need not line up across ports even when the algorithm matches. Each version is written to stay consistent with its own hashing; any gap between language-specific expected-output files comes from that platform difference rather than from inconsistent ports of the same design.
 
 <a name="overview"></a>Slides
 ---------------------------------------
