@@ -1,0 +1,28 @@
+m=31 k=4 n=5 p=0.05
+rain member
+snow member
+completely-unrelated-token-xyz absent
+frost member
+zzzzzzzz-not-inserted-00000 false_positive
+eclipse member
+made-up-word-qwfp absent
+breeze member
+this-string-was-never-added false_positive
+aurora member
+breeze member
+
+m=115 k=1 n=12 p=0.01
+hello absent
+world absent
+anything absent
+
+m=93 k=4 n=15 p=0.05
+red member
+green member
+cyan-never-added absent
+yellow member
+magenta-never-added absent
+blue member
+orange member
+violet member
+pink-never-added absent

@@ -1,9 +1,11 @@
+#include <cmath>
 #include <iostream>
+#include <set>
 #include <vector>
 
 uint64_t FNV_prime = 0x100000001b3;
-// Typically the seed is 0xcbf29ce484222325, but for our purposes it should be ok to be custom values?
-// Should verify this
+// This is a custom hash function, not part of the Bloom Filter itself
+// Typically the seed is 0xcbf29ce484222325, but we can supply custom seeds
 uint64_t fnv1a_hash(std::string data, uint64_t seed) {
     uint64_t hash = seed;
     for (char c : data) {
@@ -18,12 +20,12 @@ class BloomFilter {
     std::vector<bool> bit_array;
     int hash_functions;
     uint64_t seed1 = 0xcbf29ce484222325; // FNV-1a seed
-    uint64_t seed2 = 0xdeadbeef; // kekw
+    uint64_t seed2 = 0xdeadbeef; // random stuff lol
 
 public:
-    BloomFilter(int bits, int hash_functions) {
-        this->bit_array = std::vector(bits, false);
-        this->hash_functions = hash_functions;
+    BloomFilter(int bits, int hash_functions)
+        : bit_array(bits, false),
+        hash_functions(hash_functions) {
     }
 
     void add(const std::string& str) {
@@ -54,24 +56,67 @@ public:
 
 };
 
+double ln2pow2 = std::pow(std::log(2), 2);
+
 int main() {
-    // Example: 1000 bits, 7 hash functions
-    BloomFilter filter(1000, 7);
+    int testCases;
+    std::cin >> testCases;
 
-    filter.add("hello");
-    filter.add("world");
+    for (int i = 0; i < testCases; i++) {
+        int expectedItems, entries, queries;
+        double falsePosRate;
+        std::cin >> expectedItems >> falsePosRate >> entries >> queries;
 
-    std::cout << std::boolalpha;
-    std::cout << "Contains 'hello': " << filter.contains("hello") << std::endl;
-    std::cout << "Contains 'amogus': " << filter.contains("amogus") << std::endl;
+        // m = -(n * ln(p)) / (ln(2)^2)
+        // matches python implementation
+        int bloomSize = static_cast<int>(-(expectedItems * std::log(falsePosRate)) / ln2pow2);
+        bloomSize = std::max(1, bloomSize);
 
-    filter.add("amogus");
-    std::cout << "Contains 'amogus': " << filter.contains("amogus") << std::endl;
+        int numHashFunctions;
+        if (entries <= 0) {
+            numHashFunctions = 1;
+        } else {
+            // k = (m/n) * ln(2)
+            // matches python implementation
+            numHashFunctions = static_cast<double>(bloomSize) / expectedItems * std::log(2);
+            numHashFunctions = std::max(1, numHashFunctions);
+        }
 
-    filter.add("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-    std::cout << "Contains the lorem ipsum stuff: " << filter.contains("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.") << std::endl;
+        std::cout << "m=" << bloomSize << " k=" << numHashFunctions <<
+            " n=" << expectedItems << " p=" << falsePosRate << "\n";
 
-    std::cout << "Contains 'Lorem': " << filter.contains("Lorem") << std::endl;
+        BloomFilter filter = BloomFilter(bloomSize, numHashFunctions);
+        std::set<std::string> groundTruth;
+
+        for (int j = 0; j < entries; j++) {
+            std::string entry;
+            std::cin >> entry;
+            filter.add(entry);
+            groundTruth.insert(entry);
+        }
+
+        // our test.txt has a --- separator
+        std::string separator;
+        std::cin >> separator;
+        if (separator != "---") {
+            std::cerr << "Could not find the --- separator\n";
+            return 1;
+        }
+
+        for (int j = 0; j < queries; j++) {
+            std::string query;
+            std::cin >> query;
+            if (filter.contains(query) && groundTruth.contains(query)) {
+                std::cout << query << " member\n";
+            } else if (!filter.contains(query)) {
+                std::cout << query << " absent\n";
+            } else if (filter.contains(query) && !groundTruth.contains(query)) {
+                std::cout << query << " false_positive\n";
+            }
+        }
+
+        std::cout << "\n";
+    }
 
     return 0;
 }
