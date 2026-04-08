@@ -1,4 +1,4 @@
-Project 00 - Coin Change
+Project 10 - Aho Corasick Algorithm
 ===============================
 
 Go [back to home page](../../index.html)
@@ -14,13 +14,16 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [C++](./implementations/AhoCorasick.cpp)
+	- [Java](./implementations/AhoCorasick.java)
+	- [Python](./implementations/AhoCorasick.py)
 	- io
 		- [test input 1](./implementations/io/sample.in.1)
 		- [test output 1](./implementations/io/sample.out.1)
-		- ...add more as needed
+		- [test input 2](./implementations/io/sample.in.2)
+		- [test output 2](./implementations/io/sample.out.2)
+		- [test input 3](./implementations/io/sample.in.3)
+		- [test output 3](./implementations/io/sample.out.3)
 
 <a name="overview"></a>Slides
 ---------------------------------------
