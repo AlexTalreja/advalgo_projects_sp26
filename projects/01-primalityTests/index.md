@@ -25,7 +25,7 @@ Go [back to home page](../../index.html)
 		- [test input 3 - prime numbers under 1000 using Miller-Rabin method](./implementations/io/sample3.in)
 		- [test output 3](./implementations/io/sample3.out)
 		- [test input 4 - variety, including very large numbers](./implementations/io/sample4.in)
-		- [test output 4](./implementations/io/sample5.out)
+		- [test output 4](./implementations/io/sample4.out)
 
 <a name="overview"></a>Slides
 ---------------------------------------
