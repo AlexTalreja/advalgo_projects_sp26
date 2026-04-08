@@ -14,12 +14,16 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [Rust](./implementations/mos_rust/src/mos.rs)
+	- [Java](./implementations/mos.java)
+	- [Python](./implementations/mos.py)
 	- io
-		- [test input 1](./implementations/io/sample.in.1)
-		- [test output 1](./implementations/io/sample.out.1)
+		- [test input 1](./implementations/io/test1.in)
+		- [test output 1](./implementations/io/test1.out)
+		- [test input 2](./implementations/io/test2.in)
+		- [test output 2](./implementations/io/test2.out)
+		- [test input 3](./implementations/io/test3.in)
+		- [test output 3](./implementations/io/test3.out)
 		- ...add more as needed
 
 <a name="overview"></a>Slides
