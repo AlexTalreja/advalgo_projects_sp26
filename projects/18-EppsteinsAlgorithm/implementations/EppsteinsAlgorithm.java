@@ -28,6 +28,9 @@ https://www.geeksforgeeks.org/dsa/leftist-tree-leftist-heap/
 
 */
 public class EppsteinsAlgorithm {
+
+    // This is just a temporary class needed to sort. all we really
+//. need to do wit this is assign a heap to a priority in a PQ and let sort, hence needing comparable
     static class Heappair implements Comparable<Heappair>{
         int value;
         Heap heap;
@@ -35,6 +38,7 @@ public class EppsteinsAlgorithm {
             this.value = value;
             this.heap = heap;
         }
+         // standard comparision about the priority for PQ sorting
         @Override
         public int compareTo(Heappair other){
             return Integer.compare(this.value, other.value);
@@ -61,23 +65,30 @@ public class EppsteinsAlgorithm {
             this.targetnode = out.targetnode;
             this.dist = out.dist;
         }
+        // this is a leftist heap. quite tricky.
         public static Heap merge(Heap left, Heap right){
+            // tree should not be null and must be left weighted. This means that
+            // there are more nodes of lower cost on the left. 
             if(left == null){return right;}
             if(right == null){return left;}
             if(left.cost > right.cost){
                 Heap temp = left; left = right; right = temp;
             }
+            // We can just ensure that the less number (more priority) branch ends up on top by choosing
+            // the better of the two branches at each level then going through the chosen one's (right) child and the nonchosen.
             left.right = merge(left.right, right);
             if(left.left == null){
                 left.left = left.right;
                 left.right = null;
             }
             else{
+                 // logic here is to try to ensure that heap has a proper left of possible and the left is deeper than the right.
                 if(left.right == null || (left.left != null && left.left.dist < left.right.dist)){
                     Heap temp = left.left;
                     left.left = left.right;
                     left.right = temp;
                 }
+                 //label distance of node after transformation
                 left.dist = (left.right == null ? 1 : left.right.dist + 1);
             }
             return left;
@@ -88,13 +99,14 @@ public class EppsteinsAlgorithm {
 
     public static List<TreeMap<Integer,Integer>> djikstra(TreeMap<Integer,ArrayList<int[]>> graph, Integer src){
 
-
+        //basic djikstra. assign tenporary values that the nodes have huge cost and no way to get to it.
         TreeMap<Integer, Integer> costs = new TreeMap<Integer,Integer>();
         TreeMap<Integer, Integer> parents = new TreeMap<Integer,Integer>();
         for(int node : graph.keySet()){
             parents.put(node, null);
             costs.put(node, Integer.MAX_VALUE);
         }
+        //starting with the source node, put its info in the PQ and get its neighbors to explore next
         PriorityQueue<int[]> pq = new PriorityQueue<>((x,y)->Integer.compare(x[0],y[0])); // (totcost, node, parent)
         TreeSet<Integer> covered = new TreeSet<Integer>();
         costs.put(src,0);
@@ -103,6 +115,7 @@ public class EppsteinsAlgorithm {
         for(int[] nbr : graph.get(src)){
             pq.offer(new int[]{nbr[1],nbr[0],src});
         }
+        //go through the least cumulative cost node, say we got to it, and add itd neighbors cost to the  PQ to explore those.
         while(pq.peek()!=null){
             int[] top = pq.poll();
             if(!covered.contains(top[1])){
@@ -119,7 +132,7 @@ public class EppsteinsAlgorithm {
                 }
             }
         }
-        return List.of(costs,parents);
+        return List.of(costs,parents); //just to pack the dist from node to rest and the parents of the visiting tree. 
     }
 
     public static void main(String[] args){
@@ -141,7 +154,8 @@ public class EppsteinsAlgorithm {
 
         TreeMap<Integer,ArrayList<int[]>> invgraph = new TreeMap<Integer,ArrayList<int[]>>(); // node: (nbr, cost);
         for(int i=1;i<=5;i++){invgraph.put(i, new ArrayList<int[]>());}
-
+        // we need to run djikstra on the inverse graph since we need to determine cheapest way to get to t from here. construct it by
+        // saying an edge (a,b) is now edge (b,a) in thr inverse graph.
         for(int node : graph.keySet()){
             for(int[] nbrdata : graph.get(node)){
                 invgraph.get(nbrdata[0]).add(new int[]{node, nbrdata[1]});
@@ -152,7 +166,7 @@ public class EppsteinsAlgorithm {
         List<TreeMap<Integer,Integer>> djout = djikstra(invgraph, dest);
         TreeMap<Integer,Integer> dists = djout.get(0);
         TreeMap<Integer,Integer> parents = djout.get(1);
-
+        // we need to take note of which children are ublocked by which parent node. helpful for calculating detours.
         TreeMap<Integer, ArrayList<Integer>> childlist = new TreeMap<Integer, ArrayList<Integer>>(); 
         for(int node : graph.keySet()){
             childlist.put(node, new ArrayList<Integer>());
@@ -169,7 +183,7 @@ public class EppsteinsAlgorithm {
         vertexqueue.addLast(dest);
         while(!vertexqueue.isEmpty()){
             int node = vertexqueue.pollFirst();
-            
+            // for each child of the node, the detour cost is thr difference beteeen its min-djikstra distance and that of the parent. this is added to current cost for total detour cost
             for(int[] data : graph.get(node)){  
                 int child = data[0];
                 int cost = data[1];
@@ -183,22 +197,22 @@ public class EppsteinsAlgorithm {
                     heaps.put(node, Heap.merge(new Heap(detourcost, child), heaps.get(node)));
                 }
             }
-
+            // the reason we calculate children is so we know childs csn inherit parents' possibke detours. 
             for(int child : childlist.get(node)){
                 heaps.put(child, Heap.merge(heaps.get(child), heaps.get(node)));
                 vertexqueue.addLast(child);
             }
         }
-
+     
         ArrayList<Integer> answers = new ArrayList<Integer>();
         answers.add(dists.get(src)); //answer 1: djikstra;
 
-        
+        // PQ so we can explore heaps (having less total detouring cost) first 
         PriorityQueue<Heappair> explorequeue = new PriorityQueue<Heappair>();
 
         //store as current distnace, the heap we use.
 
-        //why is this null bruh
+        //why is this null bruh. i had to do some null check here since java complains.
         if(heaps.get(src)!=null){
             explorequeue.add(new Heappair(dists.get(src) + heaps.get(src).cost, heaps.get(src)));
             while(answers.size() < k && !explorequeue.isEmpty()){
@@ -208,9 +222,9 @@ public class EppsteinsAlgorithm {
                 answers.add(curcost);
                 //options: 
                 /*
-                - left child with its detour
-                - right child with its detour
-                - current detour
+                - left child with its detour -> cost incorporates difference of best travel cost of both nodes since that is effectivr codt of switching (from current to left node)
+                - right child with its detour -> see above
+                - current detour -> add the current heaps detour cost to the current cost
                 */
                 if(curheap.left!=null){
                     explorequeue.add(new Heappair(curcost + curheap.left.cost - curheap.cost, curheap.left));
@@ -223,7 +237,7 @@ public class EppsteinsAlgorithm {
             
                 }
             }
-        }
+        } // print out array of cost
         System.out.println("Answers");
         System.out.println(answers);
 
