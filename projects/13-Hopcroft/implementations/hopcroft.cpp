@@ -114,7 +114,7 @@ DFA hopcroft_minimize(const DFA& dfa) {
         worklist.pop();
         inWorklist.erase(splitterIdx);
 
-        const std::set<int>& splitter = groups[splitterIdx];
+        const std::set<int> splitter = groups[splitterIdx];
 
         // Try each symbol independently — a group might need splitting
         // with respect to one symbol but not another.
@@ -357,7 +357,7 @@ std::string format_dfa_schema(const DFA& dfa) {
 
 int main(int argc, char* argv[]) {
     // Default to a test input if no file is given on the command line.
-    std::string filename = (argc > 1) ? argv[1] : "io/sample.sample.1.in";
+    std::string filename = (argc > 1) ? argv[1] : "io/sample.in.1";
 
     DFA dfa = parse_dfa(filename);
 
