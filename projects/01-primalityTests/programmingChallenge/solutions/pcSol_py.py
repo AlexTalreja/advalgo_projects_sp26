@@ -1,5 +1,6 @@
 from collections import deque
 
+# Faster exponentiation function (explained in base implementation)
 def power_mod(base, exp, mod):
     result = 1
     base = base % mod
@@ -15,6 +16,7 @@ def power_mod(base, exp, mod):
     # Result now holds (base^exp) % mod
     return result
 
+# Miller-Rabin composite check (explained in base implementation)
 def check_composite(n, a, d, r):
     x = power_mod(a, d, n)
 
@@ -29,6 +31,7 @@ def check_composite(n, a, d, r):
         
     return True
 
+# Miller Rabin implementation
 def is_prime_miller_rabin(n, k=5):
     if n <= 1:
         return False
@@ -45,6 +48,7 @@ def is_prime_miller_rabin(n, k=5):
         d //= 2
         r += 1
 
+    # Deterministic implementation for 64-bit integers, checking these bases will catch all non-primes
     for a in {2, 325, 9375, 28178, 450775, 9780504, 1795265022}:
         if a % n == 0:
             continue
@@ -55,7 +59,7 @@ def is_prime_miller_rabin(n, k=5):
     
     return True
 
-
+#Finding all numbers that can be created by changing one digit of the current number.
 def get_neighbors(num):
     neighbors = []
     s = list(str(num))
@@ -120,7 +124,7 @@ def reconstruct(meet, parent1, parent2):
 
     return path1 + path2
 
-
+# Bidirectional search code -- faster than basic BFS/DFS to find path between two nodes.
 def bidirectional_prime_path(src, target):
     if src == target:
         return [src]
