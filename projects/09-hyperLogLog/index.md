@@ -1,9 +1,7 @@
-Project 00 - Coin Change
+Project 09 - Hyper Log Log
 ===============================
 
 Go [back to home page](../../index.html)
-
-**NOTE THAT THIS IS JUST A TEMPLATE. THE LINKS BELOW DO NOT WORK UNTIL A PROJECT IS ACTUALLY SUBMITTED / PUSHED TO THIS REPOSITORY**
 
 <a name="overview"></a>Executive Summary
 ---------------------------------------
@@ -14,13 +12,16 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [C++](./implementations/hyperLogLog.cpp)
+	- [Java](./implementations/hyperLogLog.java)
+	- [Python](./implementations/hyperLogLog.py)
 	- io
 		- [test input 1](./implementations/io/sample.in.1)
 		- [test output 1](./implementations/io/sample.out.1)
-		- ...add more as needed
+		- [test input 2](./implementations/io/sample.in.2)
+		- [test output 2](./implementations/io/sample.out.2)
+		- [test input 3](./implementations/io/sample.in.3)
+		- [test output 3](./implementations/io/sample.out.3)
 
 <a name="overview"></a>Slides
 ---------------------------------------
