@@ -1,9 +1,9 @@
-Project 00 - Coin Change
+Project 13 - Hopcroft's Algorithm for DFA Minimization
 ===============================
 
-Go [back to home page](../../index.html)
+By: Yu Cao, Brian Tran, Yog Tadhani
 
-**NOTE THAT THIS IS JUST A TEMPLATE. THE LINKS BELOW DO NOT WORK UNTIL A PROJECT IS ACTUALLY SUBMITTED / PUSHED TO THIS REPOSITORY**
+Go [back to home page](../../index.html)
 
 <a name="overview"></a>Executive Summary
 ---------------------------------------
@@ -14,13 +14,24 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [C++](./implementations/hopcroft.cpp)
+	- [Java](./implementations/Hopcroft.java)
+	- [Python](./implementations/hopcroft.py)
 	- io
 		- [test input 1](./implementations/io/sample.in.1)
 		- [test output 1](./implementations/io/sample.out.1)
-		- ...add more as needed
+		- [test input 2](./implementations/io/sample.in.2)
+		- [test output 2](./implementations/io/sample.out.2)
+		- [test input 3](./implementations/io/sample.in.3)
+		- [test output 3](./implementations/io/sample.out.3)
+
+Input Schema:
+- Line 1: N S A (num states, alphabet size, num accepting states)
+- Line 2: c1 c2 ... cN (state symbols, space-separated)
+- Line 3: p1 p2 ... pS (alphabet symbols, space-seperated)
+- Line 4: start_state
+- Line 5: a1 a2 ... aA (accepting states, space-separated)
+- Line 6: src symbol dest (one transition per line, N\*S lines total)
 
 <a name="overview"></a>Slides
 ---------------------------------------

@@ -1,4 +1,4 @@
-Project 00 - Coin Change
+Project 17 - Minkowski Sum
 ===============================
 
 Go [back to home page](../../index.html)
@@ -14,18 +14,21 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [C++](./implementation/minkowskiSum.cpp)
+	- [Java](./implementation/minkowskiSum.java)
+	- [Python](./implementation/minkowskiSum.py)
 	- io
-		- [test input 1](./implementations/io/sample.in.1)
-		- [test output 1](./implementations/io/sample.out.1)
-		- ...add more as needed
+		- [test input 1](./implementation/io/sample.in.1)
+		- [test output 1](./implementation/io/sample.out.1)
+		- [test input 2](./implementation/io/sample.in.2)
+		- [test output 2](./implementation/io/sample.out.2)
+        - [test input 3](./implementation/io/sample.in.3)
+		- [test output 3](./implementation/io/sample.out.3)
 
 <a name="overview"></a>Slides
 ---------------------------------------
 
-- [Presentation Slides](./slides/presentation_coinChange.pptx)
+- [Presentation Slides](./slides/presentation_minkowskiSum.pptx)
 
 
 <a name="overview"></a>Programming Challenge

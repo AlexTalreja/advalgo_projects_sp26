@@ -1,4 +1,4 @@
-Project 00 - Coin Change
+Project 00 - Primality Tests
 ===============================
 
 Go [back to home page](../../index.html)
@@ -14,13 +14,18 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [C++](./implementations/primality.cpp)
+	- [Java](./implementations/Primality.java)
+	- [Python](./implementations/primality.py)
 	- io
-		- [test input 1](./implementations/io/sample.in.1)
-		- [test output 1](./implementations/io/sample.out.1)
-		- ...add more as needed
+		- [test input 1 - prime numbers under 1000 using brute force method](./implementations/io/sample1.in)
+		- [test output 1](./implementations/io/sample1.out)
+		- [test input 2 - prime numbers under 1000 using Fermat's method](./implementations/io/sample2.in)
+		- [test output 2](./implementations/io/sample2.out)
+		- [test input 3 - prime numbers under 1000 using Miller-Rabin method](./implementations/io/sample3.in)
+		- [test output 3](./implementations/io/sample3.out)
+		- [test input 4 - variety, including very large numbers](./implementations/io/sample4.in)
+		- [test output 4](./implementations/io/sample4.out)
 
 <a name="overview"></a>Slides
 ---------------------------------------

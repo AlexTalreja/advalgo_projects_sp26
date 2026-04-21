@@ -14,13 +14,13 @@ Go [back to home page](../../index.html)
 ---------------------------------------
 
 - Implementations:
-	- [C++](./implementations/coinChange.cpp)
-	- [Java](./implementations/coinChange.java)
-	- [Python](./implementations/coinChange.py)
+	- [C++](./implementations/cpp/burrowsWheelerTransform.cpp)
+	- [Java](./implementations/burrowsWheelerTransform.java)
+	- [Python](./implementations/burrowsWheelerTransform.py)
 	- io
-		- [test input 1](./implementations/io/sample.in.1)
-		- [test output 1](./implementations/io/sample.out.1)
-		- ...add more as needed
+		- [sample input 1](./implementations/io/sample.in.1) / [sample output 1](./implementations/io/sample.out.1)
+		- [sample input 2](./implementations/io/sample.in.2) / [sample output 2](./implementations/io/sample.out.2)
+		- [sample input 3](./implementations/io/sample.in.3) / [sample output 3](./implementations/io/sample.out.3)
 
 <a name="overview"></a>Slides
 ---------------------------------------
