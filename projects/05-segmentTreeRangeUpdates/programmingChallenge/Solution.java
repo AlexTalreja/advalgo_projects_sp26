@@ -57,7 +57,6 @@ public class Solution {
         int queries = scan.nextInt();
 
         StringBuilder results = new StringBuilder();
-        results.append('\n');
         
         for (int i = 0; i < queries; i++){
             //tree.printTree();
@@ -75,7 +74,7 @@ public class Solution {
                 results.append('\n');
             }
         }
-        System.out.println(results);
+        System.out.print(results.toString());
         scan.close();
     }
 
@@ -191,7 +190,10 @@ public class Solution {
             }
             // if it splits the middle, call the recursive call on both halves of the query
             else{
-                return Math.min(minHelper(left, mid, curNode.leftChild), sumHelper(mid + 1, right, curNode.rightChild));
+                return Math.min(
+                    minHelper(left, mid, curNode.leftChild),
+                    minHelper(mid + 1, right, curNode.rightChild)
+                );
             }
         }
 
