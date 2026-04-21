@@ -14,12 +14,15 @@ do
 
         java Solution < "$infile" > temp.out
 
-        if diff -q temp.out "$outfile" > /dev/null; then
-            echo "Test $i: PASS"
-            passed=$((passed+1))
-        else
-            echo "Test $i: FAIL"
-        fi
+    if diff temp.out "$outfile" > /dev/null; then
+        echo "Test $i: PASS"
+        passed=$((passed+1))
+    else
+        echo "Test $i: FAIL"
+        echo "---- Expected vs Actual ----"
+        diff temp.out "$outfile"
+        echo "----------------------------"
+    fi
     fi
 done
 
